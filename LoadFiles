@@ -1,0 +1,55 @@
+import java.io.File;
+
+
+public class LoadFiles {
+	private int foldersize;
+//	private File[] folders;
+	private String[] foldersString;
+	private String fp;
+	Stack<String> imfilenames = new Stack<String>();
+	public LoadFiles (String folderpath)
+	{
+		fp = folderpath;
+		File homepath = new File(fp);
+//		folders = homepath.listFiles();
+		foldersString = homepath.list();
+		foldersize = foldersString.length;
+//		StdOut.println("the size of the folders is " + folders.length);
+	}
+	
+	public int numfolders()
+	{
+		return foldersize;
+	}
+	
+	public String folder(int folderindex)
+	{
+		return foldersString[folderindex];
+	}
+	public void printfolders()
+	{
+		for (int i = 0; i < foldersize ; i++)
+			StdOut.println(foldersString[i]);
+		
+		StdOut.println("total number of folders is "+ foldersize);
+	}
+	public Iterable<String> imagefiles(String fn) {
+		File folderpath = new File(fn);
+		String[] allimfiles = folderpath.list();
+		int noffiles = allimfiles.length;
+		for (int i = 0; i < noffiles; i++)
+		{
+			String tname = allimfiles[i];
+			imfilenames.push(tname);
+		}
+		return imfilenames;
+	}
+	public static void main(String[] args) {  // solve a slider puzzle (given below)
+		   
+		String flocation = "C:/Users/Alex/Downloads/train";
+		LoadFiles lf = new LoadFiles(flocation);
+		lf.printfolders();
+
+	}
+
+}
